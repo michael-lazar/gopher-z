@@ -1,9 +1,11 @@
 #!/usr/bin/env bash
 
+yum install gcc
+
 # Build and install frotz
 pushd /tmp
 if [ -d "frotz" ]; then rm -Rf frotz; fi
-git clone https://gitlab.com/DavidGriffith/frotz/
+git clone https://gitlab.com/DavidGriffith/frotz.git
 pushd frotz
 make dumb
 make install_dfrotz
