@@ -1,6 +1,6 @@
 {% extends "layout.gopher" %}
 {% block body %}
-Now Playing: {{ game }}
+Now Playing: {{ current_game }}
 
 {{ screen }}
 {{ menu.query(prompt, url_for('play_game', nonce=nonce)) }}

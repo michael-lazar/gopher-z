@@ -15,7 +15,7 @@
 Spider and Web (tangle)
 By Andrew Plotkin
 
-{{ menu.submenu('Play Spider and Web', url_for('new_game', game='tangle')) }}
+{{ menu.submenu('Play Spider and Web', url_for('new_game', game='tangle', nonce=nonce)) }}
 
 --- About ---
 
@@ -26,10 +26,10 @@ without leaving your own armchair! But all is not as it seems...
 
 --- Game Details ---
 
-Genre:           Science Fiction/Espionage
-Date of Release: 1998
-Language:        English (en)
-License:         Freeware
+Genre:        Science Fiction/Espionage
+Release Date: 1998
+Language:     English (en)
+License:      Freeware
 
 {{ menu.file('Walkthrough', url_for('static', filename='tangle_walkthrough.txt')) }}
 {{ menu.html('Interactive Fiction DB Entry (HTTP)', 'https://ifdb.tads.org/viewgame?id=2xyccw3pe0uovfad') }}

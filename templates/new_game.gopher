@@ -1,16 +1,19 @@
 {% extends "layout.gopher" %}
 {% block body %}
+Now Playing: {{ game }}
+
 {% if captcha %}
 Before you begin, solve the following CAPTCHA to verify that
 you're human. Please be kind and don't abuse the server :)
 
 {{ menu.query(captcha, url_for('new_game', game=game, nonce=nonce)) }}
 {% if is_invalid %}Invalid answer, try again{% endif %}
+{% elif not confirmed %}
+It looks like you already have a game in-progress
+{{ menu.submenu('Start a new game', url_for('new_game', game=game, action='confirm', nonce=nonce)) }}
+{{ menu.submenu('Continue your existing game', url_for('play_game', nonce=nonce)) }}
 {% else %}
-{% if game %}
-Warning! Starting a new game will delete your current progress
-{% endif %}
-{{ menu.submenu('continue...', url_for('play_game')) }}
+{{ menu.submenu('continue...', url_for('play_game', nonce=nonce)) }}
 {% endif %}
 
 {% endblock %}

@@ -20,12 +20,7 @@ app = Flask(__name__, static_url_path='')
 app.config.from_pyfile('gopher-z.cfg')
 
 gopher = GopherExtension(app)
-
 game_dir = os.path.join(os.path.abspath(os.path.dirname(__file__)), 'games')
-
-
-# TODO: figure out how to handle IP address limiting
-# TODO: test server load
 
 
 class GameEnded(Exception):
@@ -44,8 +39,9 @@ class FrotzProcess:
 
     games = {
         'tangle': 'Tangle.z5',
-        'lost_pid': 'LostPig.z8',
-        'zork': 'ZORK1.DAT'
+        'lost-pig': 'LostPig.z8',
+        'zork': 'ZORK1.DAT',
+        'planetfall': 'PLANETFA.DAT'
     }
 
     # Be over-conservative about what characters are allowed in commands
@@ -305,8 +301,9 @@ class User:
         self.game = FrotzProcess(game)
 
     def finish_game(self):
-        logger.info(f'Stopping Frotz for user {self.token}')
         if self.game:
+            name = self.game.game_name
+            logger.info(f'Stopping Frotz for user {self.token}, game {name}')
             self.game.close()
             self.game = None
 
@@ -327,12 +324,13 @@ def add_context():
     except AttributeError:
         game = None
 
-    return {'nonce': nonce, 'game': game, 'token': token}
+    return {'nonce': nonce, 'current_game': game, 'token': token}
 
 
 @app.route('/newgame/<game>')
 @app.route('/newgame/<game>/<nonce>')
-def new_game(game, nonce=None):
+@app.route('/newgame/<game>/<action>/<nonce>')
+def new_game(game, action=None, nonce=None):
     if game not in FrotzProcess.games:
         message = "Whoops! It looks like you're trying to access an invalid URL."
         return gopher.render_menu_template('error.gopher', message=message)
@@ -350,8 +348,13 @@ def new_game(game, nonce=None):
                 is_invalid=is_invalid,
             )
 
-    user.start_game(game)
-    return gopher.render_menu_template('new_game.gopher', game=game)
+    if user.game and action != 'confirm':
+        confirmed = False
+    else:
+        confirmed = True
+        user.start_game(game)
+
+    return gopher.render_menu_template('new_game.gopher', game=game, confirmed=confirmed)
 
 
 @app.route('/game')
@@ -359,7 +362,7 @@ def new_game(game, nonce=None):
 @app.route('/game/<action>/<nonce>')
 def play_game(action=None, nonce=None):
     user = g.user
-    if not user.game or (action and action != 'return'):
+    if not user.game:
         message = "Whoops! It looks like you're trying to access an invalid URL."
         return gopher.render_menu_template('error.gopher', message=message)
 
@@ -394,8 +397,14 @@ def zork():
     return gopher.render_menu_template('zork.gopher')
 
 
+@app.route('/planetfall')
+def planetfall():
+    return gopher.render_menu_template('planetfall.gopher')
+
+
 @app.route('/')
-def index():
+@app.route('/index/<nonce>')
+def index(nonce=None):
     return gopher.render_menu_template('index.gopher')
 
 

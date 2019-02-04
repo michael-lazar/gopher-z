@@ -11,7 +11,7 @@ __________            __     .___
 ZORK I: The Great Underground Empire
 by Marc Blank and Dave Lebling
 
-{{ menu.submenu('Play Zork I', url_for('new_game', game='zork')) }}
+{{ menu.submenu('Play Zork I', url_for('new_game', game='zork', nonce=nonce)) }}
 
 --- About ---
 
@@ -22,10 +22,10 @@ treasures and deposit them in your trophy case
 
 --- Game Details ---
 
-Genre:           Zorkian/Cave crawl
-Date of Release: 1980
-Language:        English (en)
-License:         Former commercial
+Genre:        Zorkian/Cave crawl
+Release Date: 1980
+Language:     English (en)
+License:      Former commercial
 
 {{ menu.file('Walkthrough', url_for('static', filename='zork_walkthrough.txt')) }}
 {{ menu.file('Hints', url_for('static', filename='zork_hints.txt')) }}

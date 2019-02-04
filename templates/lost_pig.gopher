@@ -1,0 +1,35 @@
+{% extends "layout.gopher" %}
+{% block body %}
+                                                  ,.
+                                                 (_|,.
+                                                ,' /, )_______   _
+                                             __j o``-'        `.'-)'
+ __    _____  ___  ____    ____  ____  ___  (")                 \'
+(  )  (  _  )/ __)(_  _)  (  _ \(_  _)/ __)  `-j                |
+ )(__  )(_)( \__ \  )(     )___/ _)(_( (_-.    `-._(           /
+(____)(_____)(___/ (__)   (__)  (____)\___/       |_\  |--^.  /
+                                                 /_]'|_| /_)_/
+                                                    /_]'  /_]'
+Lost Pig
+By Admiral Jota
+
+{{ menu.submenu('Play Lost Pig', url_for('new_game', game='lost-pig', nonce=nonce)) }}
+
+--- About ---
+
+Pig lost! Boss say that it Grunk fault. Say Grunk forget about
+closing gate. Maybe boss right. Grunk not remember forgetting, but
+maybe Grunk just forget. Boss say Grunk go find pig, bring it back.
+Him say, if Grunk not bring back pig, not bring back Grunk either.
+Grunk like working at pig farm, so now Grunk need find pig.
+
+--- Game Details ---
+
+Genre:        Fantasy, Humor
+Release Date: 2007
+Language:     English (en)
+License:      Freeware
+
+{{ menu.file('Walkthrough', url_for('static', filename='lost_pig_walkthrough.txt')) }}
+{{ menu.html('Interactive Fiction DB Entry (HTTP)', 'https://ifdb.tads.org/viewgame?id=mohwfk47yjzii14w') }}
+{% endblock %}

@@ -5,14 +5,15 @@ Welcome to Gopher-Z! You've worked hard today. Now it's time to
 kick back, relax, and unwind with a classic interactive fiction
 game.  Delivered straight to your PC using the gopher protocol.
 
-{% if game %}
-{{ menu.submenu('*** Continue game [%s] ***' % game, url_for('play_game')) }}
+{% if current_game %}
+{{ menu.submenu('*** Continue game [%s] ***' % current_game, url_for('play_game', nonce=nonce)) }}
 {% endif %}
 
 Games Library
-{{ menu.submenu('Zork I (1980)', url_for('zork')) }}
-{{ menu.submenu('Spider and Web (1998)', url_for('tangle')) }}
 {{ menu.submenu('Lost Pig (2007)', url_for('lost_pig')) }}
+{{ menu.submenu('Spider and Web (1998)', url_for('tangle')) }}
+{{ menu.submenu('Planetfall (1993)', url_for('planetfall')) }}
+{{ menu.submenu('Zork I (1980)', url_for('zork')) }}
 
 This gopher hole is made possible by
 {{ menu.html('Frotz - A Portable Z-Machine Interpreter', 'https://frotz.sourceforge.io/') }}

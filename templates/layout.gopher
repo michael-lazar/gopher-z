@@ -4,6 +4,6 @@
 
 {% block body %}{% endblock %}
 
-{{ menu.submenu('Gopher-Z Homepage', url_for('index')) }}
+{{ menu.submenu('Gopher-Z Homepage', url_for('index', nonce=nonce)) }}
 {{ '_' * gopher.width }}
 {{ ('Session: ' + token) | float_right('Powered by ' + request.environ['SERVER_SOFTWARE']) }}
