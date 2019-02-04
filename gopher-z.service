@@ -1,0 +1,14 @@
+# Example systemd service script
+# /etc/systemd/system/gopher-z.service
+
+[Unit]
+Description=Gopher-Z Server
+
+[Service]
+Type=simple
+Restart=always
+RestartSec=5
+ExecStart=/var/gopher/gopher-z/run_server.py
+
+[Install]
+WantedBy=default.target
