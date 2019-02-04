@@ -1,0 +1,36 @@
+{% extends "layout.gopher" %}
+{% block body %}
+
+   +----------------------------------------------------------------
+   :". /  /  /
+   :.-". /  /   ()                                        _     _
+   : _.-". /    /\            /                       /  ' )   /   /
+   :"  _.-".   /  )  _   o __/ _  __    __.  ____  __/    / / /_  /
+   :-""     "./__/__/_)_<_(_/_</_/ (_  (_/|_/ / <_(_/_   (_(_/</_/_)
+   :               /
+ ^.-.^            '
+'^\+/^`
+'/`"'\`
+
+Spider and Web (tangle)
+By Andrew Plotkin
+
+{{ menu.submenu('Play Spider and Web', url_for('new_game', game='tangle')) }}
+
+--- About ---
+
+A vacation in our lovely country! See the ethnic charms of the
+countryside, the historic grandeur of the capital city. Taste our
+traditional cuisine; smell the flowers of the Old Tree. And all
+without leaving your own armchair! But all is not as it seems...
+
+--- Game Details ---
+
+Genre:           Science Fiction/Espionage
+Date of Release: 1998
+Language:        English (en)
+License:         Freeware
+
+{{ menu.file('Walkthrough', url_for('static', filename='tangle_walkthrough.txt')) }}
+{{ menu.html('Interactive Fiction DB Entry (HTTP)', 'https://ifdb.tads.org/viewgame?id=2xyccw3pe0uovfad') }}
+{% endblock %}

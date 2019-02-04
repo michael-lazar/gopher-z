@@ -1,0 +1,16 @@
+{% extends "layout.gopher" %}
+{% block body %}
+{% if captcha %}
+Before you begin, solve the following CAPTCHA to verify that
+you're human. Please be kind and don't abuse the server :)
+
+{{ menu.query(captcha, url_for('new_game', game=game, nonce=nonce)) }}
+{% if is_invalid %}Invalid answer, try again{% endif %}
+{% else %}
+{% if game %}
+Warning! Starting a new game will delete your current progress
+{% endif %}
+{{ menu.submenu('continue...', url_for('play_game')) }}
+{% endif %}
+
+{% endblock %}

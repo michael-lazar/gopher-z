@@ -1,0 +1,9 @@
+         />_________G_O_P_H_E_R_-_Z___________
+[########[]___________________________________>
+         \> Classic Text-Based Adventure Games
+
+{% block body %}{% endblock %}
+
+{{ menu.submenu('Gopher-Z Homepage', url_for('index')) }}
+{{ '_' * gopher.width }}
+{{ ('Session: ' + token) | float_right('Powered by ' + request.environ['SERVER_SOFTWARE']) }}

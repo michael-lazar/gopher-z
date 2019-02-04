@@ -1,0 +1,46 @@
+{% extends "layout.gopher" %}
+{% block body %}
+
+Welcome to Gopher-Z! You've worked hard today. Now it's time to
+kick back, relax, and unwind with a classic interactive fiction
+game.  Delivered straight to your PC using the gopher protocol.
+
+{% if game %}
+{{ menu.submenu('*** Continue game [%s] ***' % game, url_for('play_game')) }}
+{% endif %}
+
+Games Library
+{{ menu.submenu('Zork I (1980)', url_for('zork')) }}
+{{ menu.submenu('Spider and Web (1998)', url_for('tangle')) }}
+{{ menu.submenu('Lost Pig (2007)', url_for('lost_pig')) }}
+
+This gopher hole is made possible by
+{{ menu.html('Frotz - A Portable Z-Machine Interpreter', 'https://frotz.sourceforge.io/') }}
+{{ menu.submenu('Flask Gopher - Modern Gopher Software', host='mozz.us', port=7005) }}
+
+The following browsers have been confirmed to work with this site
+{{ menu.html('lynx', 'https://lynx.invisible-island.net/') }}
+{{ menu.html('VF-1', 'https://github.com/solderpunk/VF-1') }}
+
+Clients are limited to one active game per IP address.
+Sessions will be cleared after a period of inactivity.
+
+ <>=======()
+(/\___   /|\\          ()==========<>_
+      \_/ | \\        //|\   ______/ \)
+        \_|  \\      // | \_/
+          \|\/|\_   //  /\/
+           (oo)\ \_//  /
+          //_/\_\/ /  |
+         @@/  |=\  \  |
+              \_=\_ \ |
+                \==\ \|\_
+             __(\===\(  )\
+            (((~) __(_/   |
+                 (((~) \  /
+                 ______/ /
+                 '------'
+
+Contact the admin (at your own risk)
+{{ menu.submenu('mozz.us', host='mozz.us') }}
+{% endblock %}

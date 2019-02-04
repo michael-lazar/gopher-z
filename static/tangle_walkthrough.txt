@@ -1,0 +1,438 @@
+"Tangle (Spider and Web)" step-by-step solution by pjg
+Modified by Nils Barth 2000-12-09 (esp. the summary of what actually happened)
+This is not the "official" solution.
+Feel free to write and upload a better solution if you want to.
+Otherwise, corrective modifications to this
+solution are welcomed and encouraged.
+
+For game Release 4 / Serial number 980226
+Other game releases may be slightly different.
+
+This game is very linear and mistakes are easy to learn from.
+In fact, much of the fun in this game is trying
+different actions.
+Pay attention though -- every clue is important.
+
+If you get stuck then consult the relevant section of the solution for help.
+
+Comments are in ()
+-----------------------------------------------------------------------------
+The Door in the Alley
+---------------------
+I
+X door
+X plate
+Push plate
+S, S
+
+(the man will appear and question you,
+ most of the time your yes/no answers don't matter)
+
+(your purpose at this point is to show the interrogator the
+ "actions you did" while breaking into his high security complex)
+
+Yes
+
+(you are being forced to "relive" your "memories"
+ for his benefit. If the game responds to one of
+ your commands in a different print style then
+ your character is trying to hide something from the man.
+ The man will be satisfied when a plausible and believable
+ series of events is "relived" for him)
+
+(much of the fun in this game is in trying different actions
+ and seeing what the result is. Don't be afraid to experiment
+ with other actions to get a better understanding of the game's ending)
+
+The Door in the Alley (again)
+-----------------------------
+I
+X door
+Knock on door
+g. g. g. g
+(eventually, the man will appear
+ and present you with a lockpick)
+Yes
+
+The Door in the Alley (yet again)
+---------------------------------
+I
+(you will now have the lockpick)
+Put rod on plate
+Wait. Again
+g
+(you must wait until the door opens)
+
+(Man)
+(the man will ask about your equipment)
+No
+No
+
+White Junction
+---------------
+save "package"
+N
+Jump
+Look in the hole
+Get package
+Open vent
+(notice the change in print style)
+(there is a vent in every room; look for them)
+(there are 2 very important vents in the game)
+D
+S, E, SE
+
+(Man)
+No
+Yes
+Yes
+
+Tee Junction
+------------
+save "clatter"
+(E. Put rod on plate. W)
+Wait. Again
+(wait until you see the guards
+or until the guards are almost on top of you)
+Throw rod east
+(the guards will go investigate the noise)
+N
+
+(man)
+Yes
+Yes
+No
+(notice how the man suggests that it will be bad if both
+ sides have the secret in the lab?)
+No
+No
+(your whole convictions about this operation may be changing)
+
+Outside Laboratory
+------------------
+save "labdoor"
+(too bad you don't have the lockpick)
+SE
+Listen. Again
+(wait for the guards to leave)
+("with'" is the commander's title)
+E
+
+(man)
+Yes
+Z
+No
+No
+
+Annex
+-----
+save "annex"
+
+(the scan, lamp, acid, and blast can be operated by
+ the key, button, voice, toggle, or timer.
+ The key and button are brief actuators,
+ the voice and toggle are on/off actuators,
+ and the timer is a cycle actuator)
+
+Look in north room
+Look in east room
+Look in south room
+
+(you can use the scan and timer or the scan and voice to enter the rooms;
+ it doesn't matter which, but voice is easier)
+
+(let's use the scan and voice first)
+Get scan, voice module
+X scan. X voice module
+X voice transmitter. Read keywords
+Connect voice module to scan
+Drop scan
+(you can't take the scan inside the rooms)
+
+Say tango
+S
+Say waltz
+Get pen then X it
+X nib
+(knock out drug)
+(you can play around in here for awhile,
+ when you are ready to leave then...)
+Say tango
+N
+Say waltz
+
+(let's go north)
+Say tango
+N
+Say waltz
+(notice the change in print style,
+ something important happened here)
+X chair
+X acid
+Sit in chair
+X bands
+Look. Again
+(keep looking until a "ghost" image of the man appears)
+X man
+Again. G. G. G
+(after the "ghost" is gone you may as well leave)
+Get up
+Say tango
+S
+Say waltz
+
+Get all
+SW
+
+(man)
+(Yes. Undo)
+No
+(the man will make you relive that scene)
+
+Annex (again)
+-------------
+save "annex2"
+
+(this is how you do it with the timer, instead of the voice,
+ in which case timing is crucial)
+Get scan, timer
+X timer. X green. X blue
+Connect timer to scan
+Turn green to 1
+Turn blue to 1
+Drop scan
+Push green. Push blue
+
+S. Get pen. N
+I
+
+(the timer will cause the scan to cycle properly)
+E. X plays. W
+Push green
+(must turn it off)
+Get all
+(you couldn't find the lockpick)
+SW
+
+(man)
+Yes
+Yes
+
+Diagonal Branch
+---------------
+save "gun"
+S
+Wait
+(wait for the door to open)
+Stab guard with pen
+Climb cabinet
+X wall
+X vent then open it
+Put all in vent
+(you don't want the man to get all of
+ your secret spy equipment and tools)
+D
+X guard then get gun
+shoot guards with gun
+(or just wait, but it's more fun to shoot them)
+(you will be captured)
+
+(man)
+No
+No
+save "acid"
+(the following is a very good puzzle -- don't read the following
+ unless you are -really- stuck)
+
+(the man will order your equipment brought into the room)
+
+Look
+X desk
+X items
+(what items are missing?)
+
+
+Say tango
+(you really are quite clever)
+(Notice that you haven't told the truth to "with'", as you did come
+ into the interrogation room; what else did you lie about?
+ (See end of file for answers))
+(The action now becomes dead serious -- you know what you must do:
+ get into the lab, and steal/stop the research.)
+Hit man
+Search man
+Get all from desk
+S, SW
+save "escape"
+
+S, E
+Put rod on plate
+Wait. G. G
+(the door will open)
+N
+Disconnect radio
+(the radio is broken)
+Connect button to blast
+save "blast"
+
+Push button
+(bang!)
+S
+Get rod
+
+W. W. NW
+W. N
+Jump
+Open vent
+Get gun
+D. E
+save "guards"
+
+Shoot guards
+(you can stay here and shoot guards if you want to)
+SE
+
+N. NW
+Put rod on plate
+Wait. G. G
+(the lab door will open)
+Get rod
+W
+Open panel
+Shoot layer
+(this will delay the guards, you can relax now)
+
+Search table
+Get papers, plate
+Read papers
+save "papers"
+
+(you have 3 endings:
+ Failure (death),
+ Fail to make a difference (left something behind),
+ or Made a difference (destroyed it, or take it with you)
+
+You "win" this game by not letting the enemy get your spy
+equipment AND by destroying or taking the lab research papers.
+
+(Take it with you version of the ending)
+----------------------------------------
+restore "papers"
+Open cabinet
+Put plate in cabinet
+Close cabinet
+X console
+Push upper
+X display
+Push oval
+(you don't want the teleporter to
+ return you to the lab)
+Open flap
+save "takeit"
+
+Push lower
+(you have activated the machine)
+Enter platform
+Close flap
+Read papers
+save "end1"
+
+Wait. G
+(this is the "best" ending that you can get)
+--------------------------------------------------------
+
+
+(Destoyed version of the ending)
+--------------------------------
+restore "papers"
+X device
+(a coffee maker)
+Get pot
+Put papers in alcove
+Push tiny
+Open cabinet
+Put plate in cabinet
+Close cabinet
+X papers
+(the papers will be burning now)
+Get papers
+Put all on table
+(you are destroying all of your equipment as well)
+
+X console
+Push upper
+X display
+Push oval
+(you don't want the teleporter to
+ return you to the lab)
+Open flap
+save "destroy"
+
+(now you can wait around and watch the lab burn)
+Wait. G
+(wait until the Guard mentions a "hole big enough to fire through")
+Push lower
+(you have activated the machine)
+Enter platform
+Close flap
+save "end2"
+
+Wait. G. G
+(neither side got the teleporter)
+-------------------------------------------------------------
+
+Game summary of what you "relived" for "with'":
+You broke into the complex by using your lockpick on the alley door.
+You retrieved a package hidden in the ceiling hole.
+You distracted the guards with the lockpick in the dead end.
+You couldn't open the lab door without your lockpick,
+so you went to security to get it back.
+You searched the locker room and his office but couldn't find it.
+You were surprised by a guard and drugged him.
+You knew that you were about to be captured, so you hid your
+secret spy equipment and the package in the air vent above the file cabinet.
+-----------------------------------------
+
+Game summary of what really happened:
+You broke into the complex by using your lockpick on the alley door.
+Noticing the metal detector at the red line, you stashed -your- gun in
+the ceiling, behind the vent (because your side does not have
+non-metal guns, so you couldn't get past the line until the power
+is cut). There is no package -- it's a ruse you made up to explain
+the blood on the ceiling.
+You then broke into the wiring room so that you could cut the power,
+by putting the blast tab in the wires. You left in a rush as the guards
+came, losing your lockpick (accidentally) on the way.
+Now because the key transmitter was jammed, you couldn't blast the
+wires, and because you had lost your lockpick, you couldn't get back
+into the closet to set it off manually.
+You couldn't open the (acid proof) lab door without your lockpick,
+(or your blast tab, since that was in the wiring room), and figured
+you might be caught, so you rigged an escape mechanism to the metal
+interrogation chair.
+(You knew your enemy's interrogation methods)
+Also, you searched the locker room for weapons and found a drug pen.
+(note that you used the scan scrambler connected to the timer
+ to get into the interrogation room, since you needed to connect
+ the voice module to the acid).
+(the following is speculative -- it's unclear whether you -wanted-
+ to get captured, or if this was accidental)
+You needed to get a gun, since you couldn't bring yours across
+the red line with the power on, so you surprised and drugged the guard
+and took his, and hid your now useless toolbox in the vent (at the
+only other place you could reach a vent) before you got captured.
+You then got captured by the guard squad.
+-------------------
+
+For fun have you...
+-- figured out the woman's profession?
+-- met the Janitor?
+-- met the three groups of technicians?
+-- examined the 3 paintings in the office?
+-- understood the Rita joke?
+-- gotten the man to kill you in the chair twice?
+-- met the guards while hanging from the ceiling?
+-- tried to take the wrench across the red line?
+-- tried to leave the same way that you came in?
+-- used the scan more than 4 times?
+-- found two identical vents?

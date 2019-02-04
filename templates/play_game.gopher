@@ -1,0 +1,10 @@
+{% extends "layout.gopher" %}
+{% block body %}
+Now Playing: {{ game }}
+
+{{ screen }}
+{{ menu.query(prompt, url_for('play_game', nonce=nonce)) }}
+
+{{ menu.submenu('Send an empty query string (i.e. press the "Enter" key)', url_for('play_game', action='return', nonce=nonce)) }}
+{{ menu.file('How to play', url_for('static', filename='how_to_play.txt')) }}
+{% endblock %}

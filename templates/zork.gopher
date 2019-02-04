@@ -1,0 +1,33 @@
+{% extends "layout.gopher" %}
+{% block body %}
+
+__________            __     .___
+\____    /___________|  | __ |   |
+  /     //  _ \_  __ \  |/ / |   |
+ /     /(  <_> )  | \/    <  |   |
+/_______ \____/|__|  |__|_ \ |___|
+        \/                \/
+
+ZORK I: The Great Underground Empire
+by Marc Blank and Dave Lebling
+
+{{ menu.submenu('Play Zork I', url_for('new_game', game='zork')) }}
+
+--- About ---
+
+Many strange tales have been told of the fabulous treasure, exotic
+creatures, and diabolical puzzles in the Great Underground Empire.
+As an aspiring adventurer, you will undoubtedly want to locate these
+treasures and deposit them in your trophy case
+
+--- Game Details ---
+
+Genre:           Zorkian/Cave crawl
+Date of Release: 1980
+Language:        English (en)
+License:         Former commercial
+
+{{ menu.file('Walkthrough', url_for('static', filename='zork_walkthrough.txt')) }}
+{{ menu.file('Hints', url_for('static', filename='zork_hints.txt')) }}
+{{ menu.html('Interactive Fiction DB Entry (HTTP)', 'https://ifdb.tads.org/viewgame?id=0dbnusxunq7fw5ro') }}
+{% endblock %}
