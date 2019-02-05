@@ -43,5 +43,5 @@ Sessions will be cleared after a period of inactivity.
                  '------'
 
 Contact the admin (at your own risk)
-{{ menu.submenu('mozz.us', host='mozz.us') }}
+{{ menu.submenu('mozz.us', host='mozz.us', port=70) }}
 {% endblock %}
