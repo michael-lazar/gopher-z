@@ -37,7 +37,7 @@ class FrotzProcess:
     """
     command = ['dfrotz', '-p', '-w 67', '-S 67']
 
-    games = {
+    game_files = {
         'tangle': 'Tangle.z5',
         'lost-pig': 'LostPig.z8',
         'zork': 'ZORK1.DAT',
@@ -52,9 +52,9 @@ class FrotzProcess:
         'I\'m sorry, but the "{cmd}" command is not currently implemented\n\n>'
     )
 
-    def __init__(self, game_name):
-        self.game_name = game_name
-        self.game_file = self.games[game_name]
+    def __init__(self, game):
+        self.game = game
+        self.game_file = self.game_files[game]
         self.process = None
         self.last_screen = ''
 
@@ -155,11 +155,11 @@ class Session:
     def __init__(self):
         self.unverified_users = OrderedDict()
         self.unverified_users_limit = 1000
-        self.unverified_users_max_age = 60 * 5
+        self.unverified_users_max_age = 60 * 5      # 5 minute timeout
 
         self.verified_users = OrderedDict()
         self.verified_users_limit = 20
-        self.verified_users_max_age = 60 * 60 * 24
+        self.verified_users_max_age = 60 * 60 * 24  # 24 hour timeout
 
         self.evict_interval = 60 * 5
 
@@ -193,7 +193,7 @@ class Session:
             while len(self.verified_users) > self.verified_users_limit:
                 token, user = self.verified_users.popitem(last=False)
                 logger.info(f'Evicting user {token}')
-                user.finish_game()
+                user.close_frotz()
         else:
             logger.info(f'Saving user {token} as unverified')
             self.verified_users.pop(token, None)
@@ -201,7 +201,7 @@ class Session:
             while len(self.unverified_users) > self.unverified_users_limit:
                 token, user = self.unverified_users.popitem(last=False)
                 logger.info(f'Evicting user {token}')
-                user.finish_game()
+                user.close_frotz()
 
     def evict_forever(self):
         """Loop in a thread and evict inactive users from the session.
@@ -219,7 +219,7 @@ class Session:
                 if delta > self.unverified_users_max_age:
                     logger.info(f'Evicting user {token}, delta {delta:.2f}s')
                     self.unverified_users.pop(token, None)
-                    user.finish_game()
+                    user.close_frotz()
                 else:
                     break
 
@@ -230,7 +230,7 @@ class Session:
                 if delta > self.verified_users_max_age:
                     logger.info(f'Evicting user {token}, delta {delta:.2f}s')
                     self.verified_users.pop(token, None)
-                    user.finish_game()
+                    user.close_frotz()
                 else:
                     break
 
@@ -245,7 +245,7 @@ class User:
     def __init__(self, token):
         self.token = token
         self.verified = False
-        self.game = None
+        self.frotz = None
         self.last_access = None
 
         self._captcha_question = None
@@ -256,6 +256,10 @@ class User:
         """Is the user's state saved in the session backend.
         """
         return self.session.exists(self.token)
+
+    @property
+    def game(self):
+        return self.frotz.game if self.frotz else None
 
     def save(self):
         """Save the user to the session backend.
@@ -293,19 +297,18 @@ class User:
         return self.verified
 
     def communicate(self, text):
-        return self.game.communicate(text)
+        return self.frotz.communicate(text)
 
-    def start_game(self, game):
+    def launch_frotz(self, game):
         logger.info(f'Starting Frotz for user {self.token}, game {game}')
-        self.finish_game()
-        self.game = FrotzProcess(game)
+        self.close_frotz()
+        self.frotz = FrotzProcess(game)
 
-    def finish_game(self):
-        if self.game:
-            name = self.game.game_name
-            logger.info(f'Stopping Frotz for user {self.token}, game {name}')
-            self.game.close()
-            self.game = None
+    def close_frotz(self):
+        if self.frotz:
+            logger.info(f'Stopping Frotz for user {self.token}, game {self.game}')
+            self.frotz.close()
+            self.frotz = None
 
 
 @app.before_request
@@ -316,14 +319,10 @@ def load_user():
 
 @app.context_processor
 def add_context():
-    # A random nonce to prevent clients from caching pages
+    # A random nonce added to URLs prevents clients from caching pages
     nonce = secrets.token_urlsafe(8)
     token = g.user.token
-    try:
-        game = g.user.game.game_name
-    except AttributeError:
-        game = None
-
+    game = g.user.game
     return {'nonce': nonce, 'current_game': game, 'token': token}
 
 
@@ -331,7 +330,7 @@ def add_context():
 @app.route('/newgame/<game>/<nonce>')
 @app.route('/newgame/<game>/<action>/<nonce>')
 def new_game(game, action=None, nonce=None):
-    if game not in FrotzProcess.games:
+    if game not in FrotzProcess.game_files:
         message = "Whoops! It looks like you're trying to access an invalid URL."
         return gopher.render_menu_template('error.gopher', message=message)
 
@@ -348,11 +347,11 @@ def new_game(game, action=None, nonce=None):
                 is_invalid=is_invalid,
             )
 
-    if user.game and action != 'confirm':
+    if user.frotz and action != 'confirm':
         confirmed = False
     else:
         confirmed = True
-        user.start_game(game)
+        user.launch_frotz(game)
 
     return gopher.render_menu_template('new_game.gopher', game=game, confirmed=confirmed)
 
@@ -362,7 +361,7 @@ def new_game(game, action=None, nonce=None):
 @app.route('/game/<action>/<nonce>')
 def play_game(action=None, nonce=None):
     user = g.user
-    if not user.game:
+    if not user.frotz:
         message = "Whoops! It looks like you're trying to access an invalid URL."
         return gopher.render_menu_template('error.gopher', message=message)
 
@@ -374,12 +373,18 @@ def play_game(action=None, nonce=None):
     try:
         screen = user.communicate(command)
     except GameEnded:
-        user.finish_game()
+        user.close_frotz()
         message = 'Your game has ended.'
         return gopher.render_menu_template('error.gopher', message=message)
 
     screen, _, prompt = screen.rpartition('\n')
     return gopher.render_menu_template('play_game.gopher', screen=screen, prompt=prompt)
+
+
+@app.route('/')
+@app.route('/index/<nonce>')
+def index(nonce=None):
+    return gopher.render_menu_template('index.gopher')
 
 
 @app.route('/lost_pig')
@@ -400,12 +405,6 @@ def zork():
 @app.route('/planetfall')
 def planetfall():
     return gopher.render_menu_template('planetfall.gopher')
-
-
-@app.route('/')
-@app.route('/index/<nonce>')
-def index(nonce=None):
-    return gopher.render_menu_template('index.gopher')
 
 
 if __name__ == '__main__':
