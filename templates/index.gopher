@@ -42,6 +42,9 @@ Sessions will be cleared after a period of inactivity.
                  ______/ /
                  '------'
 
+Learn More
+{{ menu.submenu('Interactive Fiction Archive Mirror', 'if-archive', host='gopher.661.org') }}
+
 Contact the admin (at your own risk)
 {{ menu.submenu('mozz.us', host='mozz.us', port=70) }}
 {% endblock %}
