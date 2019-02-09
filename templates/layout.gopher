@@ -6,4 +6,4 @@
 
 {{ menu.submenu('Gopher-Z Homepage', url_for('index', nonce=nonce)) }}
 {{ '_' * gopher.width }}
-{{ ('Session: ' + token) | float_right('Powered by ' + request.environ['SERVER_SOFTWARE']) }}
+{{ ('Your IP: ' + request.environ['REMOTE_ADDR']) | float_right('Powered by ' + request.environ['SERVER_SOFTWARE']) }}
