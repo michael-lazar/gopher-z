@@ -13,7 +13,7 @@
 ---
 
 This repository contains the complete source code for Gopher-Z. The codebase has
-been open sourced as a demonstration of how to build an application with
+been made open source as a demonstration of how to build an application with
 [Flask-Gopher](https://github.com/michael-lazar/flask-gopher). Feel free to use
 the issue tracker if you encounter a bug or a broken link. The code is not well
 documented, but if you poke around you might find something interesting!
