@@ -17,13 +17,9 @@ class GameEnded(Exception):
 class Frotz:
     """Wrapper around communication with the frotz command line program.
 
-    Frotz is launched as a long-running subprocess. The user with communicates
+    Frotz is launched as a long-running subprocess. The user communicates
     with the process by sending text commands that end with a newline. The
-    response is immediately printed to the screen and can be read through
-    stdout.
-
-    Normally, users can save their current game state to an external file. This
-    has been disabled due to complexity and might be implemented in the future.
+    response fromt is immediately printed to stdout.
     """
     COMMAND = ['dfrotz', '-p', '-w 67', '-S 67']
     GAMES = {
