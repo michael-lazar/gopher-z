@@ -1,6 +1,6 @@
-import time
-import random
 import logging
+import random
+import time
 from collections import OrderedDict
 
 logger = logging.getLogger(__name__)
@@ -32,24 +32,22 @@ class Session:
 
     def __init__(self):
         self.unverified_users = OrderedDict()
-        self.unverified_users_limit = 1000          # 1000 users
-        self.unverified_users_max_age = 60 * 5      # 5 minute timeout
+        self.unverified_users_limit = 1000  # 1000 users
+        self.unverified_users_max_age = 60 * 5  # 5 minute timeout
 
         self.verified_users = OrderedDict()
-        self.verified_users_limit = 20              # 20 users
+        self.verified_users_limit = 20  # 20 users
         self.verified_users_max_age = 60 * 60 * 24  # 24 hour timeout
 
         # Loop every 5 minutes to check for expired user sessions
         self.evict_interval = 60 * 5
 
     def exists(self, pk):
-        """Check if the user is already saved in the session.
-        """
+        """Check if the user is already saved in the session."""
         return pk in self.unverified_users or pk in self.verified_users
 
     def load(self, pk):
-        """Given a user pk, attempt to load the user from the session.
-        """
+        """Given a user pk, attempt to load the user from the session."""
         if pk in self.unverified_users:
             self.unverified_users.move_to_end(pk)
             return self.unverified_users[pk]
@@ -66,49 +64,48 @@ class Session:
         user will be evicted to make room.
         """
         if user.verified:
-            logger.info(f'Saving user {pk} as verified')
+            logger.info(f"Saving user {pk} as verified")
             self.unverified_users.pop(pk, None)
             self.verified_users[pk] = user
             while len(self.verified_users) > self.verified_users_limit:
                 pk, user = self.verified_users.popitem(last=False)
-                logger.info(f'Evicting user {pk}')
+                logger.info(f"Evicting user {pk}")
                 self.evict(user)
 
         else:
-            logger.info(f'Saving user {pk} as unverified')
+            logger.info(f"Saving user {pk} as unverified")
             self.verified_users.pop(pk, None)
             self.unverified_users[pk] = user
             while len(self.unverified_users) > self.unverified_users_limit:
                 pk, user = self.unverified_users.popitem(last=False)
-                logger.info(f'Evicting user {pk}')
+                logger.info(f"Evicting user {pk}")
                 self.evict(user)
 
     def evict_forever(self):
-        """Loop in a thread and evict inactive users from the session.
-        """
-        logger.info('Entering evict_forever loop')
+        """Loop in a thread and evict inactive users from the session."""
+        logger.info("Entering evict_forever loop")
         while True:
             time.sleep(self.evict_interval)
-            logger.info('Searching for users to evict')
+            logger.info("Searching for users to evict")
             now = time.time()
 
             count = len(self.unverified_users)
-            logger.info(f'Total {count} unverified users')
+            logger.info(f"Total {count} unverified users")
             for pk, user in list(self.unverified_users.items()):
                 delta = now - user.last_access
                 if delta > self.unverified_users_max_age:
-                    logger.info(f'Evicting user {pk}, delta {delta:.2f}s')
+                    logger.info(f"Evicting user {pk}, delta {delta:.2f}s")
                     self.unverified_users.pop(pk, None)
                     self.evict(user)
                 else:
                     break
 
             count = len(self.verified_users)
-            logger.info(f'Total {count} verified users')
+            logger.info(f"Total {count} verified users")
             for pk, user in list(self.verified_users.items()):
                 delta = now - user.last_access
                 if delta > self.verified_users_max_age:
-                    logger.info(f'Evicting user {pk}, delta {delta:.2f}s')
+                    logger.info(f"Evicting user {pk}, delta {delta:.2f}s")
                     self.verified_users.pop(pk, None)
                     self.evict(user)
                 else:
@@ -122,7 +119,6 @@ class Session:
 
 
 class User:
-
     # Global session state shared among all threads
     session = Session()
 
@@ -137,8 +133,7 @@ class User:
 
     @property
     def persistent(self):
-        """Is the user's state saved in the session backend.
-        """
+        """Is the user's state saved in the session backend."""
         return self.session.exists(self.pk)
 
     @property
@@ -146,8 +141,7 @@ class User:
         return self.frotz.game if self.frotz else None
 
     def save(self):
-        """Save the user to the session backend.
-        """
+        """Save the user to the session backend."""
         self.session.save(self.pk, self)
 
     @classmethod
@@ -164,17 +158,15 @@ class User:
         return user
 
     def get_captcha(self):
-        """Get a captcha question that the user must solve to verify themselves.
-        """
+        """Get a captcha question that the user must solve to verify themselves."""
         self.save()
         a, b = random.randint(1, 10), random.randint(1, 10)
-        self._captcha_question = f'{a} + {b} = ?'
+        self._captcha_question = f"{a} + {b} = ?"
         self._captcha_answer = a + b
         return self._captcha_question
 
     def check_captcha(self, answer):
-        """Check that the user's captcha response is correct.
-        """
+        """Check that the user's captcha response is correct."""
         if answer.strip() == str(self._captcha_answer):
             self.verified = True
             self.save()
