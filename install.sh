@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 yum install gcc
-python3.6 -m pip install flask-gopher
+python3 -m pip install flask-gopher
 
 # Build and install frotz
 pushd /tmp
