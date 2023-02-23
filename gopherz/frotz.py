@@ -3,6 +3,7 @@ import os
 import select
 import subprocess
 from string import ascii_letters, digits
+from typing import Any
 
 logger = logging.getLogger(__name__)
 
@@ -32,14 +33,17 @@ class Frotz:
     def __init__(self, game):
         self.game = game
         self.game_file = self.GAMES[game]
-        self.process = None
+        self.process: Any = None
         self.last_screen = ""
 
     def launch(self):
         """Launch the subprocess and load the initial frotz game screen."""
         data_path = os.path.join(GAME_DIR, self.game_file)
         self.process = subprocess.Popen(
-            self.COMMAND + [data_path], stdin=subprocess.PIPE, stdout=subprocess.PIPE, bufsize=0
+            self.COMMAND + [data_path],
+            stdin=subprocess.PIPE,
+            stdout=subprocess.PIPE,
+            bufsize=0,
         )
         logger.info(f"Launched process {self.process.pid}")
         return self._get_screen()

@@ -75,6 +75,8 @@ def play_game(action=None, nonce=None):
     if not user.frotz:
         return render_error_page()
 
+    command: str | None
+
     if action == "return":
         command = ""
     else:
